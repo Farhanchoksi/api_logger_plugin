@@ -29,6 +29,15 @@ const _cyan = '\x1B[36m';
 const _white = '\x1B[37m';
 const _magenta = '\x1B[35m';
 
+void _printLines(String prefix, String text,
+    {String suffix = '', String? firstLinePrefix}) {
+  final lines = text.split('\n');
+  for (var i = 0; i < lines.length; i++) {
+    final p = (i == 0 && firstLinePrefix != null) ? firstLinePrefix : prefix;
+    print('$p${lines[i]}$suffix');
+  }
+}
+
 String _formatJson(dynamic source) {
   if (source == null) return '';
   try {
@@ -156,8 +165,8 @@ class HttpLoggerPlugin extends http.BaseClient {
             .forEach((k, v) => print('  🏷️  $_yellow$k: $v$_reset'));
       }
       if (requestBody && request is http.Request && request.body.isNotEmpty) {
-        print(
-            '  📤 $_white${_formatJson(request.body).replaceAll('\n', '\n  ')}$_reset');
+        _printLines('  $_white', _formatJson(request.body),
+            suffix: _reset, firstLinePrefix: '  📤 $_white');
       }
       return;
     }
@@ -212,8 +221,8 @@ class HttpLoggerPlugin extends http.BaseClient {
     if (requestBody && request is http.Request && request.body.isNotEmpty) {
       if (midBorder.isNotEmpty) print(midBorder);
       print('$border$_blue Body $_reset');
-      print(
-          '$border$_white ${_formatJson(request.body).replaceAll('\n', '\n$border$_white')} $_reset');
+      _printLines('$border$_white ', _formatJson(request.body),
+          suffix: ' $_reset');
     }
     if (bottomBorder.isNotEmpty) print(bottomBorder);
   }
@@ -266,8 +275,8 @@ class HttpLoggerPlugin extends http.BaseClient {
             .forEach((k, v) => print('  🏷️  $_yellow$k: $v$_reset'));
       }
       if (responseBody && bodyStr.isNotEmpty) {
-        print(
-            '  📦 $_green${_formatJson(bodyStr).replaceAll('\n', '\n  ')}$_reset');
+        _printLines('  $_green', _formatJson(bodyStr),
+            suffix: _reset, firstLinePrefix: '  📦 $_green');
       }
       print('$_cyan${'-' * maxWidth}$_reset');
       return;
@@ -322,8 +331,7 @@ class HttpLoggerPlugin extends http.BaseClient {
     if (responseBody && bodyStr.isNotEmpty) {
       if (midBorder.isNotEmpty) print(midBorder);
       print('$border$_blue BODY $_reset');
-      print(
-          '$border$_green ${_formatJson(bodyStr).replaceAll('\n', '\n$border$_green')} $_reset');
+      _printLines('$border$_green ', _formatJson(bodyStr), suffix: ' $_reset');
     }
     if (bottomBorder.isNotEmpty) print(bottomBorder);
   }
@@ -502,8 +510,8 @@ class DioLoggerPlugin extends Interceptor {
             .forEach((k, v) => print('  🏷️  $_yellow$k: $v$_reset'));
       }
       if (requestBody && request.data != null) {
-        print(
-            '  📤 $_white${_formatJson(request.data).replaceAll('\n', '\n  ')}$_reset');
+        _printLines('  $_white', _formatJson(request.data),
+            suffix: _reset, firstLinePrefix: '  📤 $_white');
       }
       return;
     }
@@ -573,8 +581,8 @@ class DioLoggerPlugin extends Interceptor {
     if (requestBody && request.data != null) {
       if (midBorder.isNotEmpty) print(midBorder);
       print('$border$_blue Body $_reset');
-      print(
-          '$border$_white ${_formatJson(request.data).replaceAll('\n', '\n$border$_white')} $_reset');
+      _printLines('$border$_white ', _formatJson(request.data),
+          suffix: ' $_reset');
     }
     if (bottomBorder.isNotEmpty) print(bottomBorder);
   }
@@ -628,8 +636,8 @@ class DioLoggerPlugin extends Interceptor {
             .forEach((k, v) => print('  🏷️  $_yellow$k: $v$_reset'));
       }
       if (responseBody && response.data != null) {
-        print(
-            '  📦 $_green${_formatJson(response.data).replaceAll('\n', '\n  ')}$_reset');
+        _printLines('  $_green', _formatJson(response.data),
+            suffix: _reset, firstLinePrefix: '  📦 $_green');
       }
       print('$_cyan${'-' * maxWidth}$_reset');
       return;
@@ -683,8 +691,8 @@ class DioLoggerPlugin extends Interceptor {
     if (responseBody && response.data != null) {
       if (midBorder.isNotEmpty) print(midBorder);
       print('$border$_blue BODY $_reset');
-      print(
-          '$border$_green ${_formatJson(response.data).replaceAll('\n', '\n$border$_green')} $_reset');
+      _printLines('$border$_green ', _formatJson(response.data),
+          suffix: ' $_reset');
     }
     if (bottomBorder.isNotEmpty) print(bottomBorder);
   }
