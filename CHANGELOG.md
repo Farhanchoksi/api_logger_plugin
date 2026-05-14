@@ -1,3 +1,7 @@
+## 1.0.1
+
+* Fixed an issue where large response bodies were truncated at 1024 characters in the Flutter console.
+
 ## 1.0.0
 
 * Initial release.
