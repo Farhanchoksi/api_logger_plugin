@@ -111,3 +111,9 @@ Condenses the entire log into a single line.
 ## Maintainer
 
 Maintained by **Farhan Choksi**.
+
+## Support
+
+If you find this package helpful, consider supporting its development:
+
+<a href="https://www.buymeacoffee.com/farhanchoksi" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a>

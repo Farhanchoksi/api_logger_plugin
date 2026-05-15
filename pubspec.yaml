@@ -1,6 +1,6 @@
 name: api_logger_plugin
 description: A highly customizable API logger for HTTP and Dio in Dart/Flutter. Features 8 design styles, request/response filtering, and cURL command generation.
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/Farhanchoksi/api_logger_plugin
 repository: https://github.com/Farhanchoksi/api_logger_plugin
 
